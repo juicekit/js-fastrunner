@@ -1,6 +1,6 @@
 {
   "name": "@juicekit/fastrunner",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -15,6 +15,10 @@
       "email": "y.nunez@floms.com"
     }
   ],
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/juicekit/js-fastrunner.git"
+  },
   "keywords": [],
   "author": "",
   "license": "Apache-2.0",

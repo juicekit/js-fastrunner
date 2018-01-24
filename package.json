@@ -1,0 +1,24 @@
+{
+  "name": "@juicekit/fastrunner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "prepublish": "npm run build",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "contributors": [
+    {
+      "name": "Yoel Nunez",
+      "email": "y.nunez@floms.com"
+    }
+  ],
+  "keywords": [],
+  "author": "",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "typescript": "^2.6.2"
+  }
+}

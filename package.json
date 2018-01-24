@@ -1,13 +1,13 @@
 {
   "name": "@juicekit/fastrunner",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "prepublish": "npm run build",
     "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/nyc mocha --compilers ts:ts-node/register ./src/**/*.spec.ts"
   },
   "contributors": [
     {
@@ -16,13 +16,38 @@
     }
   ],
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/juicekit/js-fastrunner.git"
+    "type": "git",
+    "url": "https://github.com/juicekit/js-fastrunner.git"
   },
   "keywords": [],
   "author": "",
   "license": "Apache-2.0",
   "devDependencies": {
+    "@types/chai": "^4.1.2",
+    "@types/mocha": "^2.2.47",
+    "@types/sinon": "^4.1.3",
+    "chai": "^4.1.2",
+    "gulp": "^3.9.1",
+    "gulp-mocha": "^5.0.0",
+    "mocha": "^5.0.0",
+    "nyc": "^11.4.1",
+    "sinon": "^4.2.1",
+    "ts-node": "^4.1.0",
     "typescript": "^2.6.2"
+  },
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "exclude": [
+      "**/*.d.ts",
+      "**/*.spec.ts",
+      "**/*.js"
+    ],
+    "reporter": [
+      "html"
+    ],
+    "all": true
   }
 }

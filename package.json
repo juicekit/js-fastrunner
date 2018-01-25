@@ -1,9 +1,9 @@
 {
   "name": "@juicekit/fastrunner",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/fast-runner.js",
+  "types": "dist/fast-runner.d.ts",
   "scripts": {
     "prepublish": "npm run build",
     "build": "tsc",
@@ -27,9 +27,11 @@
     "@types/mocha": "^2.2.47",
     "@types/sinon": "^4.1.3",
     "chai": "^4.1.2",
+    "codacy-coverage": "^2.0.3",
     "gulp": "^3.9.1",
     "gulp-mocha": "^5.0.0",
     "mocha": "^5.0.0",
+    "node-env-run": "^2.0.1",
     "nyc": "^11.4.1",
     "sinon": "^4.2.1",
     "ts-node": "^4.1.0",
@@ -46,8 +48,12 @@
       "**/*.js"
     ],
     "reporter": [
-      "html"
+      "html",
+      "lcov"
     ],
     "all": true
+  },
+  "dependencies": {
+    "rxjs": "^5.5.6"
   }
 }

@@ -1,0 +1,2 @@
+# js-fastrunner
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9df5a970641246df98b10f4bf57305e4)](https://www.codacy.com/app/yoel/js-fastrunner?utm_source=github.com&utm_medium=referral&utm_content=juicekit/js-fastrunner&utm_campaign=badger)

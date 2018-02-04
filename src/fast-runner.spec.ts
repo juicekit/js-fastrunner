@@ -1,6 +1,6 @@
-import { expect } from 'chai';
-import { spy } from 'sinon';
-import { FastRunner } from './fast-runner';
+import {expect} from 'chai';
+import {spy} from 'sinon';
+import {FastRunner} from './fast-runner';
 
 describe('FastRunner', () => {
     it('should resolve if no jobs are on the list', (done) => {

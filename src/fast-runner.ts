@@ -1,6 +1,9 @@
 
-import { Observable } from 'rxjs/Observable';
-import { Subject} from 'rxjs/Subject';;
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/forkJoin';
+import 'rxjs/add/operator/combineAll';
+import 'rxjs/add/observable/throw';
 
 export class FastRunner {
     constructor(private jobs: any[]) {
@@ -11,52 +14,30 @@ export class FastRunner {
     }
 
     execute<T>(worker: (job: any, index: number) => any): Observable<T> {
-        const verification = new Subject<T>(),
-            progress = new Subject<T>(),
-            totalJobs = this.Jobs.length;
-
-        let jobsInProgress = 0;
-
-        progress.subscribe((job: T) => {
-            verification.next(job);
-    
-            if (++jobsInProgress >= totalJobs) {
-                verification.complete();
-            }
-        }, (error: T|Error) => {
-            verification.error(error);
-            verification.complete();
-        });
-
-        this.Jobs.forEach((job, index) => {
-            try {
-                const result = worker(job, index);
-
-                if (result) {
-                    if (result instanceof Promise) {
-                        result.then(() => {
-                            progress.next(job);
-                        }).catch(() => {
-                            progress.error(job);
-                        });
-                    } else {
-                        // simulate asynchronous event
-                        Promise.resolve().then(() => {
-                            progress.next(job); 
-                        });
-                    }
-                } else {
-                    progress.error(job);
-                }
-            } catch(e) {
-                progress.error(job);
-            }
-        });
-
-        if (totalJobs === 0) {
-            verification.complete();
+        if (this.Jobs.length === 0) {
+            return Observable.of();
         }
 
-        return verification;
+        return Observable.forkJoin(this.Jobs.map((job, index) => {
+
+            let result;
+
+            try {
+                result = worker(job, index);
+            } catch (e) {
+                return Observable.throw(job);
+            }
+
+
+            if (result instanceof Promise) {
+                return result.catch(() => Promise.reject(job));
+            } else if (result instanceof Observable) {
+                return result;
+            } else if (result) {
+                return Observable.of(result);
+            }
+
+            return Observable.throw(job);
+        })).combineAll();
     }
 }
